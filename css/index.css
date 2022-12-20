@@ -1,0 +1,25 @@
+@import url('https://fonts.cdnfonts.com/css/google-sans');
+
+body {
+    font-family: 'Product Sans Black', sans-serif;
+    color: white;
+    background-color: #181818;
+}
+
+a {
+    text-decoration: none;
+    color: #832DDB;
+    font-size: 120%;
+}
+
+#title {
+    display: flex;
+    justify-content: center;
+    background-color: #363636;
+    border-radius: 10px;
+    border: 2px solid #B181E0; 
+}
+
+#title h1 {
+    padding-left: 15px;
+}
