@@ -10,27 +10,28 @@
  */
 var keyZones = [
     //Use this to control the key mapping:
-                //A:
+                //A (0): 
                 [81],
-                //B:
+                //B (1):
                 [83],
-                //Select:
+                //Select (2):
                 [-7],
-                //Start:
+                //Start (3):
                 [10],
-                //Right:
+                //Right (4):
                 [39],
-                //Left:
+                //Left (5):
                 [37],
-                //Up:
+                //Up (6):
                 [38],
-                //Down:
+                //Down (7):
                 [40],
-                //R:
+                //R (8):
                 [90],
-                //L:
+                //L (9):
                 [65]
 ];
+
 function keyDown(e) {
     var keyCode = e.keyCode | 0;
     for (var keyMapIndex = 0; (keyMapIndex | 0) < 10; keyMapIndex = ((keyMapIndex | 0) + 1) | 0) {
@@ -46,6 +47,7 @@ function keyDown(e) {
         }
     }
 }
+
 function keyUp(keyCode) {
     keyCode = keyCode | 0;
     for (var keyMapIndex = 0; (keyMapIndex | 0) < 10; keyMapIndex = ((keyMapIndex | 0) + 1) | 0) {
@@ -58,6 +60,7 @@ function keyUp(keyCode) {
         }
     }
 }
+
 function keyUpPreprocess(e) {
     var keyCode = e.keyCode | 0;
     switch (keyCode | 0) {
@@ -78,3 +81,41 @@ function keyUpPreprocess(e) {
             keyUp(keyCode);
     }
 }
+
+function pressButton(gamepadButton, iodineButton, gp) {
+    if (gp && gp.buttons[gamepadButton].pressed) {
+        Iodine.keyDown(iodineButton);
+    } else {
+        Iodine.keyUp(iodineButton);
+    }
+}
+
+function checkButtonPress() {
+    let gamepads = navigator.getGamepads();
+  
+    if (gamepads.length > 0) {
+        let gp = gamepads[0];
+        //A:
+        pressButton(0, 0, gp);
+        //B:
+        pressButton(1, 1, gp);
+        //Select:
+        pressButton(8, 2, gp);
+        //Start:
+        pressButton(9, 3, gp);
+        //Right:
+        pressButton(15, 4, gp);
+        //Left:
+        pressButton(14, 5, gp);
+        //Up:
+        pressButton(12, 6, gp);
+        //Down:
+        pressButton(13, 7, gp);
+        //L:
+        pressButton(4, 8, gp);
+        //R:
+        pressButton(5, 9, gp);
+    }
+  }
+  
+setInterval(checkButtonPress, 25);
