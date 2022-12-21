@@ -3,7 +3,6 @@
 var games = {
     "pokemonemerald":"Pokemon Emerald",
     "pkmnemplus3":"Pokemon - Version Emeraude PLUS",
-    "pokemoneclatpourpre":"Pokemon - Eclat Pourpre",
     "smwa2":"Super Mario Advance 2 - Super Mario World",
     "fifa2006":"FIFA 2006",
     "barbiesecret": "Barbie - Secret Agent",

@@ -118,4 +118,4 @@ function checkButtonPress() {
     }
   }
   
-setInterval(checkButtonPress, 25);
+setInterval(checkButtonPress, 50);
