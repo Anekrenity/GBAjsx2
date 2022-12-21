@@ -11,6 +11,7 @@ var games = {
     "metroidfusion":"Metroid Fusion",
     "minishcap":"Legend of Zelda The Minish Cap",
 };
+
 var Iodine = null;
 var Blitter = null;
 var Mixer = null;

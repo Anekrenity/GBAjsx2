@@ -118,7 +118,7 @@ function checkButtonPress() {
             //R:
             pressButton(5, 9, gp);
 
-            if (gp && !gp.buttons[15].pressed && !gp.buttons[14].pressed && !gp.buttons[12].pressed && !gp.buttons[13].pressed) {
+            if (!gp.buttons[15].pressed && !gp.buttons[14].pressed && !gp.buttons[12].pressed && !gp.buttons[13].pressed) {
                 let xAxis = gp.axes[0];
                 let yAxis = gp.axes[1];
                 
