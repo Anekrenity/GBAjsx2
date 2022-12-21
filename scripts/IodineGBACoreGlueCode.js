@@ -7,7 +7,8 @@ var games = {
     "fifa2006":"FIFA 2006",
     "barbiesecret": "Barbie - Secret Agent",
     "cars":"Cars",
-    "zeldanes":"The Legend Of Zelda"
+    "zeldanes":"The Legend Of Zelda",
+    "metroidfusion":"Metroid Fusion"
 };
 var Iodine = null;
 var Blitter = null;
