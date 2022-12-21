@@ -3,6 +3,7 @@
 var games = {
     "pokemonemerald":"Pokemon Emerald",
     "pkmnemplus3":"Pokemon - Version Emeraude PLUS",
+    "pokemoneclatpourpre":"Pokemon - Eclat Pourpre"
 };
 var Iodine = null;
 var Blitter = null;
