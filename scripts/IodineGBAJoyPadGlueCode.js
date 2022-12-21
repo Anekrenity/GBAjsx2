@@ -83,7 +83,7 @@ function keyUpPreprocess(e) {
 }
 
 function pressButton(gamepadButton, iodineButton, gp) {
-    if (gp && gp.buttons[gamepadButton].pressed) {
+    if (gp.buttons[gamepadButton].pressed) {
         Iodine.keyDown(iodineButton);
     } else {
         Iodine.keyUp(iodineButton);
@@ -95,26 +95,56 @@ function checkButtonPress() {
   
     if (gamepads.length > 0) {
         let gp = gamepads[0];
-        //A:
-        pressButton(0, 0, gp);
-        //B:
-        pressButton(1, 1, gp);
-        //Select:
-        pressButton(8, 2, gp);
-        //Start:
-        pressButton(9, 3, gp);
-        //Right:
-        pressButton(15, 4, gp);
-        //Left:
-        pressButton(14, 5, gp);
-        //Up:
-        pressButton(12, 6, gp);
-        //Down:
-        pressButton(13, 7, gp);
-        //L:
-        pressButton(4, 8, gp);
-        //R:
-        pressButton(5, 9, gp);
+
+        if (gp) {
+            //A:
+            pressButton(0, 0, gp);
+            //B:
+            pressButton(1, 1, gp);
+            //Select:
+            pressButton(8, 2, gp);
+            //Start:
+            pressButton(9, 3, gp);
+            //Right:
+            pressButton(15, 4, gp);
+            //Left:
+            pressButton(14, 5, gp);
+            //Up:
+            pressButton(12, 6, gp);
+            //Down:
+            pressButton(13, 7, gp);
+            //L:
+            pressButton(4, 8, gp);
+            //R:
+            pressButton(5, 9, gp);
+
+            if (gp && !gp.buttons[15].pressed && !gp.buttons[14].pressed && !gp.buttons[12].pressed && !gp.buttons[13].pressed) {
+                let xAxis = gp.axes[0];
+                let yAxis = gp.axes[1];
+                
+                if (xAxis < -0.5) {
+                    //Left
+                    Iodine.keyDown(5);
+                } else if (xAxis > 0.5) {
+                    //Right
+                    Iodine.keyDown(4);
+                } else {
+                    Iodine.keyUp(4);
+                    Iodine.keyUp(5);
+                }
+                
+                if (yAxis < -0.5) {
+                    //Up
+                    Iodine.keyDown(6);
+                } else if (yAxis > 0.5) {
+                    //Down
+                    Iodine.keyDown(7);
+                } else {
+                    Iodine.keyUp(6);
+                    Iodine.keyUp(7);
+                }
+            }
+        }
     }
   }
   
