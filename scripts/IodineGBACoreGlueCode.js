@@ -8,7 +8,8 @@ var games = {
     "barbiesecret": "Barbie - Secret Agent",
     "cars":"Cars",
     "zeldanes":"The Legend Of Zelda",
-    "metroidfusion":"Metroid Fusion"
+    "metroidfusion":"Metroid Fusion",
+    "minishcap":"Legend of Zelda The Minish Cap",
 };
 var Iodine = null;
 var Blitter = null;
