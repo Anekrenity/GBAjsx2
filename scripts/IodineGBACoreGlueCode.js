@@ -3,7 +3,12 @@
 var games = {
     "pokemonemerald":"Pokemon Emerald",
     "pkmnemplus3":"Pokemon - Version Emeraude PLUS",
-    "pokemoneclatpourpre":"Pokemon - Eclat Pourpre"
+    "pokemoneclatpourpre":"Pokemon - Eclat Pourpre",
+    "smwa":"Super Mario Advance 2 - Super Mario World",
+    "fifa2006":"FIFA 2006",
+    "barbiesecret": "Barbie - Secret Agent",
+    "cars":"Cars",
+    "zeldanes":"The Legend Of Zelda"
 };
 var Iodine = null;
 var Blitter = null;
