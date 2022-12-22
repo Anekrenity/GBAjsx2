@@ -8,6 +8,7 @@
  
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+var isKeyboard = false
 var keyZones = [
     //Use this to control the key mapping:
                 //A (0): 
@@ -39,7 +40,7 @@ function keyDown(e) {
         var keysTotal = keysMapped.length | 0;
         for (var matchingIndex = 0; (matchingIndex | 0) < (keysTotal | 0); matchingIndex = ((matchingIndex | 0) + 1) | 0) {
             if ((keysMapped[matchingIndex | 0] | 0) == (keyCode | 0)) {
-                Iodine.keyDown(keyMapIndex | 0);
+                //Iodine.keyUp(keyMapIndex | 0); //No more Keyboard
                 if (e.preventDefault) {
                     e.preventDefault();
                 }
