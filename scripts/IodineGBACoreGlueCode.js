@@ -10,6 +10,16 @@ var games = {
     "zeldanes":"The Legend Of Zelda",
     "metroidfusion":"Metroid Fusion",
     "minishcap":"Legend of Zelda The Minish Cap",
+    "kirbynightmare":"Kirby : Nightmare in Dream Land ",
+    "godzilla":"Godzilla : Domination !",
+    "barbie12":"Barbie in the 12 Dancing Princesses",
+    "shreksmash":"Shrek Smash n' Crash Racing",
+    "operationpenguin":"Madagascar - Operation Penguin",
+    "supersponge":"Spongebob Squarepants : Supersponge",
+    "jurassic3":"JURASSIC PARK III",
+    "kim2":"Kim Possible : Drakken's Demise",
+    "crazytaxicatch":"Crazy Taxi : Catch a Ride",
+    "hulk":"The Incredible Hulk",
 };
 
 var Iodine = null;
