@@ -8,7 +8,8 @@
  
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-var isKeyboard = false
+
+var currentConnectedGamepad = -1
 var keyZones = [
     //Use this to control the key mapping:
                 //A (0): 
@@ -33,14 +34,27 @@ var keyZones = [
                 [65]
 ];
 
+var gamePadKeyMap = {
+    0: 0,
+    1: 1,
+    2: 8,
+    3: 9,
+    4: 15,
+    5: 14,
+    6: 12,
+    7: 13,
+    8: 5,
+    9: 4
+}
+
 function keyDown(e) {
     var keyCode = e.keyCode | 0;
     for (var keyMapIndex = 0; (keyMapIndex | 0) < 10; keyMapIndex = ((keyMapIndex | 0) + 1) | 0) {
         var keysMapped = keyZones[keyMapIndex | 0];
         var keysTotal = keysMapped.length | 0;
         for (var matchingIndex = 0; (matchingIndex | 0) < (keysTotal | 0); matchingIndex = ((matchingIndex | 0) + 1) | 0) {
-            if ((keysMapped[matchingIndex | 0] | 0) == (keyCode | 0)) {
-                //Iodine.keyUp(keyMapIndex | 0); //No more Keyboard
+            if ((keysMapped[matchingIndex | 0] | 0) == (keyCode | 0) && currentConnectedGamepad == -1) {
+                Iodine.keyDown(keyMapIndex | 0); //Sike
                 if (e.preventDefault) {
                     e.preventDefault();
                 }
@@ -55,7 +69,7 @@ function keyUp(keyCode) {
         var keysMapped = keyZones[keyMapIndex | 0];
         var keysTotal = keysMapped.length | 0;
         for (var matchingIndex = 0; (matchingIndex | 0) < (keysTotal | 0); matchingIndex = ((matchingIndex | 0) + 1) | 0) {
-            if ((keysMapped[matchingIndex | 0] | 0) == (keyCode | 0)) {
+            if ((keysMapped[matchingIndex | 0] | 0) == (keyCode | 0) && currentConnectedGamepad == -1) {
                 Iodine.keyUp(keyMapIndex | 0);
             }
         }
@@ -83,70 +97,45 @@ function keyUpPreprocess(e) {
     }
 }
 
-function pressButton(gamepadButton, iodineButton, gp) {
-    if (gp.buttons[gamepadButton].pressed) {
-        Iodine.keyDown(iodineButton);
-    } else {
-        Iodine.keyUp(iodineButton);
+function processGamepadInput() {
+    if (currentConnectedGamepad < 0) {
+        return
+        
+    }
+    var gamepad = navigator.getGamepads()[currentConnectedGamepad]
+    if (!gamepad) {
+        console.log('Gamepad disconnected.')
+        currentConnectedGamepad = -1
+        return
+    }
+    for (var i = 0; i <= 9; i++) {
+        Iodine.keyUp(i)
+    }
+    for (var i = 0; i <= 9; i++) {
+        if (gamepad.buttons[gamePadKeyMap[i]].pressed) {
+            console.log(gamePadKeyMap[i])
+            Iodine.keyDown(i)
+        }
+    }
+    if (gamepad.axes[0] < -0.5) {
+        Iodine.keyDown(5)
+    }
+    if (gamepad.axes[0] > 0.5) {
+        Iodine.keyDown(4)
+    }
+    if (gamepad.axes[1] < -0.5) {
+        Iodine.keyDown(6)
+    }
+    if (gamepad.axes[1] > 0.5) {
+        Iodine.keyDown(7)
     }
 }
 
-function checkButtonPress() {
-    let gamepads = navigator.getGamepads();
-  
-    if (gamepads.length > 0) {
-        let gp = gamepads[0];
-
-        if (gp) {
-            //A:
-            pressButton(0, 0, gp);
-            //B:
-            pressButton(1, 1, gp);
-            //Select:
-            pressButton(8, 2, gp);
-            //Start:
-            pressButton(9, 3, gp);
-            //Right:
-            pressButton(15, 4, gp);
-            //Left:
-            pressButton(14, 5, gp);
-            //Up:
-            pressButton(12, 6, gp);
-            //Down:
-            pressButton(13, 7, gp);
-            //L:
-            pressButton(4, 8, gp);
-            //R:
-            pressButton(5, 9, gp);
-
-            if (!gp.buttons[15].pressed && !gp.buttons[14].pressed && !gp.buttons[12].pressed && !gp.buttons[13].pressed) {
-                let xAxis = gp.axes[0];
-                let yAxis = gp.axes[1];
-                
-                if (xAxis < -0.5) {
-                    //Left
-                    Iodine.keyDown(5);
-                } else if (xAxis > 0.5) {
-                    //Right
-                    Iodine.keyDown(4);
-                } else {
-                    Iodine.keyUp(4);
-                    Iodine.keyUp(5);
-                }
-                
-                if (yAxis < -0.5) {
-                    //Up
-                    Iodine.keyDown(6);
-                } else if (yAxis > 0.5) {
-                    //Down
-                    Iodine.keyDown(7);
-                } else {
-                    Iodine.keyUp(6);
-                    Iodine.keyUp(7);
-                }
-            }
-        }
-    }
-  }
-  
-setInterval(checkButtonPress, 50);
+window.addEventListener("gamepadconnected", function (e) {
+    console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.",
+        e.gamepad.index, e.gamepad.id,
+        e.gamepad.buttons.length, e.gamepad.axes.length);
+    console.log('Gamepad connected.')
+    currentConnectedGamepad = e.gamepad.index
+    setInterval(processGamepadInput, 50);
+});
