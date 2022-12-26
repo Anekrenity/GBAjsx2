@@ -20,6 +20,7 @@ var games = {
     "kim2":"Kim Possible : Drakken's Demise",
     "crazytaxicatch":"Crazy Taxi : Catch a Ride",
     "hulk":"The Incredible Hulk",
+    "sonicadvance3":"Sonic Advance 3",
 };
 
 var Iodine = null;
