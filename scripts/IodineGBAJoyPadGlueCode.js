@@ -136,6 +136,6 @@ window.addEventListener("gamepadconnected", function (e) {
         e.gamepad.index, e.gamepad.id,
         e.gamepad.buttons.length, e.gamepad.axes.length);
     console.log('Gamepad connected.')
-    currentConnectedGamepad = e.gamepad.index
+    currentConnectedGamepad = 0
     setInterval(processGamepadInput, 50);
 });
